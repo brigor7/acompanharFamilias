@@ -40,6 +40,6 @@ O frontend foi desenvolvido com Angular e o backend foi simulado pela implementa
 * Comando: ng s
 
 # Prototipo Figma
-* (Link para prototipo no Figma)[https://www.figma.com/file/j3lQAZ3yInsJUwkK4s7R1h/UTFPR---Angular---Acompanhamento-Familias?type=design&node-id=1-7&t=YdQf8rM3vDKneVsl-0]
+* Link para prototipo: https://www.figma.com/file/j3lQAZ3yInsJUwkK4s7R1h/UTFPR---Angular---Acompanhamento-Familias?type=design&node-id=1-7&t=YdQf8rM3vDKneVsl-0
 
 # cadastro-familias-app
