@@ -7,6 +7,8 @@ import { CorpoAppComponent } from './corpo-app/corpo-app.component';
 import { RodapeAppComponent } from './rodape-app/rodape-app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
+import { ResponsavelComponent } from './responsavel/responsavel.component';
+import { AppRountingModule } from './app-rounting.module';
 
 @NgModule({
   declarations: [
@@ -14,11 +16,13 @@ import { FooterComponent } from './footer/footer.component';
     CorpoAppComponent,
     RodapeAppComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ResponsavelComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    AppRountingModule
   ],
   providers: [],
   bootstrap: [AppComponent]
