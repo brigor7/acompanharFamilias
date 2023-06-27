@@ -1,0 +1,95 @@
+<style>
+
+  .input-field label {
+      -webkit-transform: translateY(-14px) scale(0.8);
+      transform: translateY(-14px) scale(0.8);
+      -webkit-transform-origin: 0 0;
+      transform-origin: 0 0;
+  }
+
+</style>
+
+<div class="row">
+  <form class="col s12">
+    <div class="row">
+      <div class="input-field col s3">
+        <input disabled value="" id="id" type="text" class="validate" placeholder="">
+        <label for="nome">Código</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input name="input-nome" type="text" placeholder="Nome completo">
+        <label class="active" for="nome">Nome</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col s3">
+        <label>Data Nascimento</label>
+        <input type="date" class="datepicker" id="dataNascimento">
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="endereco" value="" type="text" class="active">
+        <label for="endereco">Endereco</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <input id="cidade" value="" type="text" class="validate" placeholder="Cidade">
+        <label for="cidade">Cidade</label>
+      </div>
+    </div>
+    <div class="row">
+        <div class=" col s4">
+            <label for="uf">UF</label>
+            <select class="browser-default" id="uf">
+              <option value="" disabled selected>Selecione UF</option>
+              <option value="1">AC - Acre</option>
+              <option value="1">AL - Alagoas</option>
+              <option value="1">AM - Amazonas</option>
+              <option value="1">AP - Amapá</option>
+              <option value="1">BA - Bahia</option>
+              <option value="1">CE - Ceará</option>
+              <option value="1">DF - Distrito Federal</option>
+              <option value="1">ES - Espírito Santo</option>
+              <option value="1">GO - Goiás</option>
+              <option value="1">MA - Maranhão</option>
+              <option value="1">MT - Mato Grosso</option>
+              <option value="1">MS - Mato Grosso do Sul</option>
+              <option value="1">MG - Minas Gerais</option>
+              <option value="1">PA - Pará</option>
+              <option value="1">PB - Paraíba</option>
+              <option value="1">PR - Paraná</option>
+              <option value="1">PE - Pernambuco</option>
+              <option value="1">PI - Piauí</option>
+              <option value="1">RJ - Rio de Janeiro</option>
+              <option value="1">RN - Rio Grande do Norte</option>
+              <option value="1">RS - Rio Grande do Sul</option>
+              <option value="1">RO - Rondônia</option>
+              <option value="1">RR - Roraima</option>
+              <option value="1">SC - Santa Catarina</option>
+              <option value="1">SP - São Paulo</option>
+              <option value="1">SE - Sergipe</option>
+              <option value="1">TO - Tocantins</option>
+            </select>
+        </div>
+      </div>
+    <div class="row">
+      <div class="input-field col s3">
+         <input id="cep" value="" type="text" class="validate" placeholder="CEP">
+         <label for="cep">CEP</label>
+      </div>
+    </div>
+  </form>
+  <div class="col s12 m6">
+    <a [routerLink]="['/sobre']" [queryParams]="{origem:'responsavel'}">
+      <div class="card-panel teal darken-4 center my-card-button">
+        <span class="white-text flow-text">Responsavel</span>
+      </div>
+    </a>
+
+  </div>
+</div>
