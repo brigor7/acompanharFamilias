@@ -6,7 +6,7 @@ import { SobreComponent } from './sobre/sobre.component';
 
 const routes: Routes = [
   {path:'responsavel', component:ResponsavelComponent},
-  {path:'sobre', component:SobreComponent}
+  {path:'sobre', component:SobreComponent},
 ]
 
 @NgModule({

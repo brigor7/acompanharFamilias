@@ -3,6 +3,9 @@ import { Responsavel } from '../responsavel.model';
 import { NgForm } from '@angular/forms';
 import { Shared } from '../util/shared';
 import { ResponsavelStorageService } from '../responsavel-storage.service';
+import { ResponsavelService } from '../responsavel.service';
+import { Subscription } from 'rxjs';
+
 
 @Component({
   selector: 'app-responsavel',
@@ -20,38 +23,81 @@ export class ResponsavelComponent {
   isSuccess!: boolean;
   message!: string;
 
-  constructor(private responsavelService: ResponsavelStorageService){}
+  constructor(private responsavelServiceSW: ResponsavelStorageService, private responsavelService:ResponsavelService){}
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
-    //let data = new Date();
-    //data.toLocaleDateString("pt-|BR");
-    this.responsavel = new Responsavel("", new Date(),"","","","");
-    this.responsaveis = this.responsavelService.getResponsaveis();
+    //this.responsavel = new Responsavel("14","Bruno Igor", new Date(),"Rua da Felicidade, 7","Luziania","GO","72850210");
+    this.responsavel = this.novoResponsavel();
+    this.responsaveis = [];
+    this.listarTodosResponsaveis();
+    this.form.reset();
+  }
+
+  novoResponsavel(){
+    return new Responsavel("","",new Date(),"","","","");
+  }
+
+  listarTodosResponsaveis(){
+    this.responsavelService.getAll().subscribe(response =>{
+      response.map(item =>{
+        this.responsaveis?.push(new Responsavel(item.id, item.nome, item.aniversario, item.endereco, item.cidade, item.uf, item.cep));
+     });
+   });
+  }
+
+  buscarMaxIdBD():Subscription{
+     return this.responsavelService.getByMaxId().subscribe(item =>{
+      return item.id;
+   });
   }
 
   onSubmit(){
     this.isSubmitted = true;
+    const nextId = this.buscarMaxIdBD().toString;
+    //this.responsavel.id = nextId.toString;
 
-    if (!this.responsavelService.isExist(this.responsavel.nome)) {
-      this.responsavelService.save(this.responsavel);
+    this.cadastrarResponsavelBD();
+    this.cadastrarResponsavelStorage();
+
+
+    this.form.reset();
+    this.responsavel = this.novoResponsavel();
+    this.responsaveis = this.responsavelServiceSW.getResponsaveis();
+  }
+
+
+  cadastrarResponsavelBD(){
+
+    this.responsavelServiceSW.save(this.responsavel);
+    //if (!this.responsavelService.isExist(this.responsavel.id)) {
+    //} else {
+      this.responsavelServiceSW.update(this.responsavel);
+    //}
+    this.isShowMessage = true;
+    this.isSuccess = true;
+    this.message = 'Cadastro realizado com sucesso!';
+
+    this.form.reset();
+    this.responsavel = this.novoResponsavel();
+
+    //this.responsaveis = this.responsavelService.getResponsaveis();
+  }
+
+  cadastrarResponsavelStorage(){
+    if (!this.responsavelServiceSW.isExist(this.responsavel.nome)) {
+      this.responsavelServiceSW.save(this.responsavel);
     } else {
-      this.responsavelService.update(this.responsavel);
+      this.responsavelServiceSW.update(this.responsavel);
     }
     this.isShowMessage = true;
     this.isSuccess = true;
     this.message = 'Cadastro realizado com sucesso!';
 
     this.form.reset();
-    this.responsavel = new Responsavel("",new Date(),"","","","");
+    this.responsavel = this.novoResponsavel();
 
-    this.responsaveis = this.responsavelService.getResponsaveis();
-
-    this.responsavelService.notifyTotalUsers();
-
-    this.form.reset();
-    this.responsavel = new Responsavel("",new Date(),"","","","");
-    this.responsaveis = this.responsavelService.getResponsaveis();
+    this.responsaveis = this.responsavelServiceSW.getResponsaveis();
   }
 
   //@param responsavel;
@@ -67,7 +113,7 @@ export class ResponsavelComponent {
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.responsavelService.delete(nome);
+    let response: boolean = this.responsavelServiceSW.delete(nome);
     this.isShowMessage = true;
     this.isSuccess = response;
     if (response) {
@@ -75,8 +121,7 @@ export class ResponsavelComponent {
     } else {
       this.message = 'Opps! O item não pode ser removido!';
     }
-    this.responsaveis = this.responsavelService.getResponsaveis();
-    //this.responsavelService.notifyTotalUsers();
+    this.responsaveis = this.responsavelServiceSW.getResponsaveis();
   }
 
 }

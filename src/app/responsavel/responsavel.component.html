@@ -28,14 +28,21 @@
   </div>
 
   <form class="col s12" #form="ngForm" (submit)="onSubmit()">
-    <!--
+
     <div class="row">
-      <div class="input-field col s3">
-        <input disabled value="" id="id" type="text" class="validate" placeholder="">
-        <label for="nome">Código</label>
+      <div class="input-field col s2">
+         <input
+          id="input-id"
+          name="input-id"
+          type="text"
+          [(ngModel)]="this.responsavel.id"
+          #id="ngModel"
+          disabled
+          />
+         <label for="input-id">Código</label>
       </div>
     </div>
-    -->
+
     <div class="row">
       <div class="input-field col s12">
         <input
@@ -62,17 +69,32 @@
     </div>
 
     <div class="row">
-      <div class="input-field col s6 l6">
+      <div class="input-field col s6">
         <input
           id="input-aniversario"
           name="input-aniversario"
           type="date"
           class="datepicker"
           [(ngModel)]="this.responsavel.aniversario"
+          #aniversario="ngModel"
         />
         <label for="input-aniversario">Data de Nascimento</label>
       </div>
     </div>
+
+    <!--div class="row">
+      <div class="input-field col s6">
+         <input
+          id="input-aniversario"
+          name="input-aniversario"
+          type="text"
+          [(ngModel)]="this.responsavel.aniversario"
+          #aniversario="ngModel"
+
+          />
+         <label for="input-aniversario">Data Nascimento</label>
+      </div>
+    </div-->
 
     <div class="row">
       <div class="input-field col s12">
@@ -163,7 +185,6 @@
 
           />
          <label for="input-cep">CEP</label>
-          Informe o CEP
       </div>
     </div>
     <div>
@@ -178,50 +199,58 @@
     </div>
   </form>
 
-  <div class="center">
-    <h5>Responsaveis cadastrados</h5>
-  </div>
-  <!-- Tabela de responsavel -->
-  <table class="highlight" *ngIf="responsaveis && responsaveis!.length > 0">
-    <thead>
-      <tr>
-        <th>Nome Completo</th>
-        <th>Endereco</th>
-        <th>Cidade</th>
-        <th></th>
-      </tr>
-    </thead>
+  <div class="container">
+    <div class="center">
+      <h5>Responsaveis cadastrados</h5>
+    </div>
+    <!-- Tabela de responsavel -->
+    <table class="highlight" *ngIf="responsaveis && responsaveis!.length > 0">
+      <thead>
+        <tr>
+          <th>Id</th>
+          <th>Nome</th>
+          <th>Endereco</th>
+          <th>Cidade</th>
+          <th>UF</th>
+          <th>Cep</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let responsavel of responsaveis">
-        <td>{{ responsavel.nome | titlecase }}</td>
-        <td>{{ responsavel.endereco | titlecase }}</td>
-        <td>{{ responsavel.cidade | titlecase}}</td>
-        <td class="right">
-          <a
-            ><i class="material-icons my-icon-size" (click)="onEdit(responsavel)"
-              >edit</i
-            ></a
-          >
-          <a
-            ><i
-              class="material-icons my-icon-size"
-              (click)="onDelete(responsavel.nome)"
-              >delete</i
-            ></a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr *ngFor="let responsavel of responsaveis">
+          <td>{{ responsavel.id | number }}</td>
+          <td>{{ responsavel.nome | titlecase }}</td>
+          <td>{{ responsavel.endereco | titlecase }}</td>
+          <td>{{ responsavel.cidade | titlecase}}</td>
+          <td>{{ responsavel.uf | titlecase}}</td>
+          <td>{{ responsavel.cep | titlecase}}</td>
+          <td class="right">
+            <a
+              ><i class="material-icons my-icon-size" (click)="onEdit(responsavel)"
+                >edit</i
+              ></a
+            >
+            <a
+              ><i
+                class="material-icons my-icon-size"
+                (click)="onDelete(responsavel.nome)"
+                >delete</i
+              ></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div *ngIf="!responsaveis || responsaveis!.length == 0">
-    <div class="row">
-      <div class="center-align">
-        <i class="col s12 material-icons large">person</i>
-        <span class="col s12 flow-text"
-          >Sem responsaveis cadastrados!</span
-        >
+    <div *ngIf="!responsaveis || responsaveis!.length == 0">
+      <div class="row">
+        <div class="center-align">
+          <i class="col s12 material-icons large">person</i>
+          <span class="col s12 flow-text"
+            >Sem responsaveis cadastrados!</span
+          >
+        </div>
       </div>
     </div>
   </div>

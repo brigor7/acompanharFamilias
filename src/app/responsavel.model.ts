@@ -1,5 +1,5 @@
 export class Responsavel {
- public id?:string;
+ public _id:string;
  private _nome:string;
  private _aniversario:Date;
  private _endereco:string;
@@ -7,7 +7,8 @@ export class Responsavel {
  private _uf:string;
  private _cep:string;
 
-  constructor(nome:string, aniversario:Date, endereco:string, cidade:string,  uf:string, cep:string){
+  constructor(id: string, nome:string, aniversario:Date, endereco:string, cidade:string,  uf:string, cep:string){
+    this._id = id;
     this._nome = nome;
     this._aniversario = aniversario;
     this._endereco = endereco;
@@ -16,7 +17,7 @@ export class Responsavel {
     this._cep = cep;
   }
 
-  /*
+
   public set id(value:string){
     this._id = value;
   }
@@ -24,7 +25,7 @@ export class Responsavel {
   public get id():string{
     return this._id;
   }
-  */
+
 
   public set nome(value:string){
     this._nome = value;
@@ -81,7 +82,8 @@ export class Responsavel {
    * @returns
    */
   public static clone(responsavel: Responsavel) {
-    let r: Responsavel = new Responsavel(responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
+    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
+    r.id = responsavel.id;
     r.nome = responsavel.nome;
     r.aniversario = responsavel.aniversario;
     r.endereco = responsavel.endereco;
@@ -97,7 +99,7 @@ export class Responsavel {
    * @returns
    */
   public static toWS(responsavel: Responsavel) {
-    let r: Responsavel = new Responsavel(responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
+    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
     r.nome = responsavel.nome;
     r.aniversario = responsavel.aniversario;
     r.endereco = responsavel.endereco;
