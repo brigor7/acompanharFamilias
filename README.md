@@ -23,9 +23,9 @@ O frontend foi desenvolvido com Angular e o backend foi simulado pela implementa
 - [X] Desabilitar o botão de submit enquanto o formulário está inválido.
 - [X] Fazer requisições a API com tratamento da resposta com Promises ou Observables.
 - [X] Cadastrar uma entidade no JSON Server.
-- [ ] Apresentar uma lista de dados com a diretiva estrutural ngFor.
-- [ ] Usar a diretiva ngIf
-- [ ] Formatar a apresentação de dados com Pipes.
+- [X] Apresentar uma lista de dados com a diretiva estrutural ngFor.
+- [X] Usar a diretiva ngIf
+- [X] Formatar a apresentação de dados com Pipes.
 - [ ] Build e deploy da aplicação.
 
 # Manual de Execução
@@ -34,11 +34,13 @@ O frontend foi desenvolvido com Angular e o backend foi simulado pela implementa
 * Fazer checkout no branch develop que contém as modificações mais recentes
 * Abrir o projeto no editor Visual Studio Code (VS Code)
 * Abrir um terminal pelo VSCode e executar a API Fake (JSON Server) via o seguinte comando:
-* Comando: npm run json-server --watch db.json --routes routes.json
+* Comando: npm run json:server:routes, mapeado no package.json
+* ou o comando: npm run json-server --watch db.json --routes routes.json
 * O comando deve ser aplicado no diretório raiz do projeto, ou seja, que contém o arquivo db.json e routes.json.
 * Abrir um novo terminal pelo VSCode e então executar o projeto Angular
 * Comando: ng s
-* Link app: http://localhost:4200/responsavel
+* Link app local: http://localhost:4200/responsavel
+* Link app produção: 
 
 # Prototipo Figma
 * Link para prototipo: https://www.figma.com/file/j3lQAZ3yInsJUwkK4s7R1h/UTFPR---Angular---Acompanhamento-Familias?type=design&node-id=1-7&t=YdQf8rM3vDKneVsl-0

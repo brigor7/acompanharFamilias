@@ -16,67 +16,68 @@ export class ResponsavelComponent {
   @ViewChild('form') form!: NgForm;
 
   responsavel!:Responsavel;
+  responsavelCopia!:Responsavel;
   responsaveis?:Responsavel[];
 
   isSubmitted!: boolean;
   isShowMessage: boolean = false;
   isSuccess!: boolean;
   message!: string;
+  isUpdateData!:boolean;
 
   constructor(private responsavelServiceSW: ResponsavelStorageService, private responsavelService:ResponsavelService){}
 
   ngOnInit(): void {
     Shared.initializeWebStorage();
-    //this.responsavel = new Responsavel("14","Bruno Igor", new Date(),"Rua da Felicidade, 7","Luziania","GO","72850210");
     this.responsavel = this.novoResponsavel();
+    this.responsavelCopia = Responsavel.clone(this.responsavel);
     this.responsaveis = [];
+    this.isUpdateData = false;
     this.listarTodosResponsaveis();
-    this.form.reset();
   }
 
   novoResponsavel(){
-    return new Responsavel("","",new Date(),"","","","");
+    return new Responsavel(this.gerarId(),"",new Date(),"","","");
+  }
+
+  gerarId():string{
+    return Math.floor(Date.now() * Math.random()).toString(32);
   }
 
   listarTodosResponsaveis(){
+    this.responsaveis = [];
     this.responsavelService.getAll().subscribe(response =>{
       response.map(item =>{
-        this.responsaveis?.push(new Responsavel(item.id, item.nome, item.aniversario, item.endereco, item.cidade, item.uf, item.cep));
+        this.responsaveis?.push(new Responsavel(item.id, item.nome, item.aniversario, item.endereco, item.cidade, item.cep));
      });
-   });
-  }
-
-  buscarMaxIdBD():Subscription{
-     return this.responsavelService.getByMaxId().subscribe(item =>{
-      return item.id;
    });
   }
 
   onSubmit(){
     this.isSubmitted = true;
-    const nextId = this.buscarMaxIdBD().toString;
-    //this.responsavel.id = nextId.toString;
-
     this.cadastrarResponsavelBD();
-    this.cadastrarResponsavelStorage();
-
-
+   // this.cadastrarResponsavelStorage();
     this.form.reset();
     this.responsavel = this.novoResponsavel();
-    this.responsaveis = this.responsavelServiceSW.getResponsaveis();
+    this.listarTodosResponsaveis();
   }
 
 
   cadastrarResponsavelBD(){
-
-    this.responsavelServiceSW.save(this.responsavel);
-    //if (!this.responsavelService.isExist(this.responsavel.id)) {
-    //} else {
-      this.responsavelServiceSW.update(this.responsavel);
-    //}
+    if (this.isUpdateData){
+      this.responsavelService.update(this.responsavel).subscribe(data =>{
+        console.log(data)
+       });
+       this.message = 'Cadastro ATUALIZADO com sucesso!';
+    } else {
+       this.responsavelService.save(this.responsavel).subscribe(data =>{
+        console.log(data)
+       });
+       this.message = 'Cadastro INCLUIDO com sucesso!';
+    }
     this.isShowMessage = true;
     this.isSuccess = true;
-    this.message = 'Cadastro realizado com sucesso!';
+
 
     this.form.reset();
     this.responsavel = this.novoResponsavel();
@@ -104,24 +105,31 @@ export class ResponsavelComponent {
   onEdit(responsavel: Responsavel){
     let clone = Responsavel.clone(responsavel);
     this.responsavel = clone;
+    this.isUpdateData = true;
   }
 
-  onDelete(nome: string){
+  onDelete(responsavel: Responsavel){
     let confirmation = window.confirm(
-      'Você tem certeza que deseja remover ' + nome
+      'Você tem certeza que deseja remover ' + responsavel.nome + ' - id: '+ responsavel.id + '?'
     );
     if (!confirmation) {
       return;
     }
-    let response: boolean = this.responsavelServiceSW.delete(nome);
+    this.responsavelService.delete(responsavel.id)
+      .subscribe({
+        next:data => {
+          this.message = 'Cadastro EXCLUIDO com sucesso!';
+          this.isSuccess = true;
+        },
+        error:error=>{
+          this.message = 'Erro ao excluir registro. Motivo: ' + error.message;
+          this.isSuccess = false;
+          console.error(this.message, error);
+        }
+      });
+
     this.isShowMessage = true;
-    this.isSuccess = response;
-    if (response) {
-      this.message = 'O item foi removido com sucesso!';
-    } else {
-      this.message = 'Opps! O item não pode ser removido!';
-    }
-    this.responsaveis = this.responsavelServiceSW.getResponsaveis();
+    this.listarTodosResponsaveis();
   }
 
 }
