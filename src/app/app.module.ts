@@ -8,7 +8,9 @@ import { RodapeAppComponent } from './rodape-app/rodape-app.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
 import { ResponsavelComponent } from './responsavel/responsavel.component';
+import { FormsModule } from '@angular/forms';
 import { AppRountingModule } from './app-rounting.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { AppRountingModule } from './app-rounting.module';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    AppRountingModule
+    AppRountingModule,
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
