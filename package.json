@@ -9,7 +9,7 @@
     "test": "ng test",
     "json:server": "json-server --watch db.json",
     "json:server:routes": "json-server --watch db.json --routes routes.json",
-    "build:prod": "ng build --prod --base-href=/cadastro-familias-app/",
+    "build:prod": "ng build --base-href=/cadastro-familias-app/",
     "ghpages": "angular-cli-ghpages --dir=dist/cadastro-familias-app",
     "deploy": "npm run build:prod & npm run ghpages"
   },
