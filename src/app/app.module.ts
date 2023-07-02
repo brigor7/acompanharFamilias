@@ -11,6 +11,7 @@ import { ResponsavelComponent } from './responsavel/responsavel.component';
 import { FormsModule } from '@angular/forms';
 import { AppRountingModule } from './app-rounting.module';
 import { HttpClientModule } from '@angular/common/http';
+import { CepPipe } from './cep.pipe';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { HttpClientModule } from '@angular/common/http';
     RodapeAppComponent,
     HeaderComponent,
     FooterComponent,
-    ResponsavelComponent
+    ResponsavelComponent,
+    CepPipe
   ],
   imports: [
     BrowserModule,

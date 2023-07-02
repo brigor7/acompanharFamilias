@@ -1,29 +1,27 @@
 export class Responsavel {
- public _id:string;
- private _nome:string;
- private _aniversario:Date;
- private _endereco:string;
- private _cidade:string;
- private _uf:string;
- private _cep:string;
+ public id:string;
+ public nome:string;
+ public aniversario:Date;
+ public endereco:string;
+ public cidade:string;
+ public cep:string;
 
-  constructor(id: string, nome:string, aniversario:Date, endereco:string, cidade:string,  uf:string, cep:string){
-    this._id = id;
-    this._nome = nome;
-    this._aniversario = aniversario;
-    this._endereco = endereco;
-    this._cidade = cidade;
-    this._uf = uf;
-    this._cep = cep;
+  constructor(_id: string, _nome:string, _aniversario:Date, _endereco:string, _cidade:string, _cep:string){
+    this.id = _id;
+    this.nome = _nome;
+    this.aniversario = _aniversario;
+    this.endereco = _endereco;
+    this.cidade = _cidade;
+    this.cep = _cep;
   }
 
-
+/*
   public set id(value:string){
-    this._id = value;
+    this.id = value;
   }
 
   public get id():string{
-    return this._id;
+    return this.id;
   }
 
 
@@ -52,14 +50,6 @@ export class Responsavel {
     return this._cidade;
   }
 
-  public set uf(value:string){
-    this._uf = value;
-  }
-
-  public get uf():string{
-    return this._uf;
-  }
-
   public set cep(value:string){
     this._cep = value;
   }
@@ -75,6 +65,7 @@ export class Responsavel {
   public get endereco():string{
     return this._endereco;
   }
+  */
 
   /**
    * Transforma um objeto passado como argumento e retorna novo objeto com os dados
@@ -82,13 +73,12 @@ export class Responsavel {
    * @returns
    */
   public static clone(responsavel: Responsavel) {
-    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
+    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.cep);
     r.id = responsavel.id;
     r.nome = responsavel.nome;
     r.aniversario = responsavel.aniversario;
     r.endereco = responsavel.endereco;
     r.cidade = responsavel.cidade;
-    r.uf = responsavel.uf;
     r.cep = responsavel.cep;
     return r;
   }
@@ -99,12 +89,11 @@ export class Responsavel {
    * @returns
    */
   public static toWS(responsavel: Responsavel) {
-    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.uf, responsavel.cep);
+    let r: Responsavel = new Responsavel(responsavel.id, responsavel.nome, responsavel.aniversario, responsavel.endereco, responsavel.cidade, responsavel.cep);
     r.nome = responsavel.nome;
     r.aniversario = responsavel.aniversario;
     r.endereco = responsavel.endereco;
     r.cidade = responsavel.cidade;
-    r.uf = responsavel.uf;
     r.cep = responsavel.cep;
     return r;
   }
