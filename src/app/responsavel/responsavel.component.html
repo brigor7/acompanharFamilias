@@ -9,7 +9,7 @@
 
 </style>
 
-<div class="row">
+<div class="container">
   <div class="center">
     <h4>Responsavel</h4>
     <hr />
@@ -28,47 +28,50 @@
   </div>
 
   <form class="col s12" #form="ngForm" (submit)="onSubmit()">
-    <!--
+
     <div class="row">
-      <div class="input-field col s3">
-        <input disabled value="" id="id" type="text" class="validate" placeholder="">
-        <label for="nome">Código</label>
+      <div class="input-field col s2">
+         <input
+          id="input-id"
+          name="input-id"
+          type="text"
+          [(ngModel)]="this.responsavel.id"
+          #id="ngModel"
+          disabled
+          />
+         <label for="input-id">Código</label>
       </div>
     </div>
-    -->
+
     <div class="row">
       <div class="input-field col s12">
         <input
           id="input-nome"
           name="input-nome"
           type="text"
-          class="validate"
-          [ngModel]="this.responsavel.nome"
+          [(ngModel)]="this.responsavel.nome"
           #nome="ngModel"
           pattern="^(\s?[A-ZÀ-Ú][a-zà-ú]*)+(\s[a-zà-ú]*)?(\s[A-ZÀ-Ú][a-zà-ú]*)+"
+          class="validate"
           placeholder="Nome completo"
           required
         >
         <label for="input-nome">Nome Completo *</label>
         <div class="red-text" [hidden]="nome.valid || nome.untouched">
-          Informe o seu nome completo
+          Informe o nome completo
         </div>
-        <span
-          class="helper-text"
-          data-error="O campo é inválido"
-          data-success="Ok!"
-        ></span>
       </div>
     </div>
 
     <div class="row">
-      <div class="input-field col s6 l6">
+      <div class="input-field col s6">
         <input
           id="input-aniversario"
           name="input-aniversario"
           type="date"
           class="datepicker"
           [(ngModel)]="this.responsavel.aniversario"
+          #aniversario="ngModel"
         />
         <label for="input-aniversario">Data de Nascimento</label>
       </div>
@@ -80,10 +83,10 @@
           id="input-endereco"
           name="input-endereco"
           type="text"
-          [ngModel]="this.responsavel.endereco"
+          [(ngModel)]="this.responsavel.endereco"
           #endereco="ngModel"
           class="validate"
-          placeholder="Endereço"
+          placeholder="Endereco"
           required
         >
         <label for="input-endereco">Endereco *</label>
@@ -111,47 +114,6 @@
       </div>
     </div>
     <div class="row">
-        <div class=" col s6">
-            <label for="input-uf">UF</label>
-            <select
-              class="browser-default"
-              id="input-uf"
-              name="input-uf"
-              [ngModel]="this.responsavel.uf"
-              #uf="ngModel"
-            >
-              <option value="" disabled selected>Selecione UF</option>
-              <option value="1">AC - Acre</option>
-              <option value="1">AL - Alagoas</option>
-              <option value="1">AM - Amazonas</option>
-              <option value="1">AP - Amapá</option>
-              <option value="1">BA - Bahia</option>
-              <option value="1">CE - Ceará</option>
-              <option value="1">DF - Distrito Federal</option>
-              <option value="1">ES - Espírito Santo</option>
-              <option value="1">GO - Goiás</option>
-              <option value="1">MA - Maranhão</option>
-              <option value="1">MT - Mato Grosso</option>
-              <option value="1">MS - Mato Grosso do Sul</option>
-              <option value="1">MG - Minas Gerais</option>
-              <option value="1">PA - Pará</option>
-              <option value="1">PB - Paraíba</option>
-              <option value="1">PR - Paraná</option>
-              <option value="1">PE - Pernambuco</option>
-              <option value="1">PI - Piauí</option>
-              <option value="1">RJ - Rio de Janeiro</option>
-              <option value="1">RN - Rio Grande do Norte</option>
-              <option value="1">RS - Rio Grande do Sul</option>
-              <option value="1">RO - Rondônia</option>
-              <option value="1">RR - Roraima</option>
-              <option value="1">SC - Santa Catarina</option>
-              <option value="1">SP - São Paulo</option>
-              <option value="1">SE - Sergipe</option>
-              <option value="1">TO - Tocantins</option>
-            </select>
-        </div>
-      </div>
-    <div class="row">
       <div class="input-field col s6">
          <input
           id="input-cep"
@@ -163,7 +125,6 @@
 
           />
          <label for="input-cep">CEP</label>
-          Informe o CEP
       </div>
     </div>
     <div>
@@ -178,50 +139,58 @@
     </div>
   </form>
 
-  <div class="center">
-    <h5>Responsaveis cadastrados</h5>
-  </div>
-  <!-- Tabela de responsavel -->
-  <table class="highlight" *ngIf="responsaveis && responsaveis!.length > 0">
-    <thead>
-      <tr>
-        <th>Nome Completo</th>
-        <th>Endereco</th>
-        <th>Cidade</th>
-        <th></th>
-      </tr>
-    </thead>
+  <div class="row">
+    <div class="center">
+      <h5>Responsaveis cadastrados</h5>
+    </div>
+    <!-- Tabela de responsavel -->
+    <table class="highlight" *ngIf="responsaveis && responsaveis!.length > 0">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Nome</th>
+          <th>Nascimento</th>
+          <th>Endereco</th>
+          <th>Cidade</th>
+          <th>Cep</th>
+          <th>Opções</th>
+        </tr>
+      </thead>
 
-    <tbody>
-      <tr *ngFor="let responsavel of responsaveis">
-        <td>{{ responsavel.nome | titlecase }}</td>
-        <td>{{ responsavel.endereco | titlecase }}</td>
-        <td>{{ responsavel.cidade | titlecase}}</td>
-        <td class="right">
-          <a
-            ><i class="material-icons my-icon-size" (click)="onEdit(responsavel)"
-              >edit</i
-            ></a
-          >
-          <a
-            ><i
-              class="material-icons my-icon-size"
-              (click)="onDelete(responsavel.nome)"
-              >delete</i
-            ></a
-          >
-        </td>
-      </tr>
-    </tbody>
-  </table>
+      <tbody>
+        <tr *ngFor="let responsavel of responsaveis">
+          <td>{{ responsavel.id | titlecase }}</td>
+          <td>{{ responsavel.nome | titlecase }}</td>
+          <td>{{ responsavel.aniversario | date  }}</td>
+          <td>{{ responsavel.endereco | titlecase }}</td>
+          <td>{{ responsavel.cidade | titlecase }}</td>
+          <td>{{ responsavel.cep | cep }}</td>
+          <td class="right">
+            <a
+              ><i class="material-icons my-icon-size" (click)="onEdit(responsavel)"
+                >edit</i
+              ></a
+            >
+            <a
+              ><i
+                class="material-icons my-icon-size"
+                (click)="onDelete(responsavel)"
+                >delete</i
+              ></a
+            >
+          </td>
+        </tr>
+      </tbody>
+    </table>
 
-  <div *ngIf="!responsaveis || responsaveis!.length == 0">
-    <div class="row">
-      <div class="center-align">
-        <i class="col s12 material-icons large">person</i>
-        <span class="col s12 flow-text"
-          >Sem responsaveis cadastrados!</span
-        >
+    <div *ngIf="!responsaveis || responsaveis!.length == 0">
+      <div class="row">
+        <div class="center-align">
+          <i class="col s12 material-icons large">person</i>
+          <span class="col s12 flow-text"
+            >Sem responsaveis cadastrados!</span
+          >
+        </div>
       </div>
     </div>
   </div>

@@ -14,7 +14,7 @@ export class Shared {
       return;
     }
 
-    let responsavel = new Responsavel("",new Date(),"","","","");
-    localStorage.setItem(Constants.RESPONSAVEIS_KEY, JSON.stringify(responsavel));
+    //let responsavel = new Responsavel("",new Date(),"","","","");
+    //localStorage.setItem(Constants.RESPONSAVEIS_KEY, JSON.stringify(responsavel));
   }
 }
