@@ -26,7 +26,7 @@ O frontend foi desenvolvido com Angular e o backend foi simulado pela implementa
 - [X] Apresentar uma lista de dados com a diretiva estrutural ngFor.
 - [X] Usar a diretiva ngIf
 - [X] Formatar a apresentação de dados com Pipes.
-- [ ] Build e deploy da aplicação.
+- [X] Build e deploy da aplicação.
 
 # Manual de Execução
 
@@ -40,7 +40,7 @@ O frontend foi desenvolvido com Angular e o backend foi simulado pela implementa
 * Abrir um novo terminal pelo VSCode e então executar o projeto Angular
 * Comando: ng s
 * Link app local: http://localhost:4200/responsavel
-* Link app produção: 
+* Link app produção: https://brigor7.github.io/cadastro-familias-app/responsavel
 
 # Prototipo Figma
 * Link para prototipo: https://www.figma.com/file/j3lQAZ3yInsJUwkK4s7R1h/UTFPR---Angular---Acompanhamento-Familias?type=design&node-id=1-7&t=YdQf8rM3vDKneVsl-0
