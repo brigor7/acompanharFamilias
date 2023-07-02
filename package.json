@@ -11,7 +11,7 @@
     "json:server:routes": "json-server --watch db.json --routes routes.json",
     "build:prod": "ng build --prod --base-href=/cadastro-familias-app/",
     "ghpages": "angular-cli-ghpages --dir=dist/cadastro-familias-app",
-    "depoly": "npm run build:prod & npm run ghpages"
+    "deploy": "npm run build:prod & npm run ghpages"
   },
   "private": true,
   "dependencies": {
